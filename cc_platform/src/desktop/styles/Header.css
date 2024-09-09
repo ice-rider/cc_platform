@@ -1,0 +1,73 @@
+.header {
+    max-width: 100vw;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+.header .header-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    margin: 0 20px;
+}
+
+.header .header-right-part-wrapper {
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-links {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.header .header-link {
+    position: relative;
+    font-size: 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    color: white;
+}
+.header .header-link:hover {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+.header .header-link:active {
+    text-decoration: underline;
+}
+
+.header .header-auth {
+    position: relative;
+    font-size: 20px;
+    margin: 0 20px;
+    color: white;
+}
+
+.header .header-profile {
+    display: flex;
+    width: 175px;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 12px;
+    padding: 5px 10px 5px 5px;
+    cursor: pointer;
+    user-select: none;
+}
+.header .header-profile:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.header .header-auth-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 175px;
+}
