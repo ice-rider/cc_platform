@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from passlib.hash import pbkdf2_sha256
+
 from .db import db, BaseModel
 from .config import UserRole, SUBSCRIPTION_PERIODS, TODAY
 
@@ -16,6 +20,18 @@ class UserModel(BaseModel):
         self.username = username
         self.password = password
         self.email = email
+
+    @classmethod
+    def auth(cls, email: str, password: str) -> UserModel | None:
+        user = cls.query.filter_by(email=email).first()
+
+        if user is None:
+            return None
+
+        if not pbkdf2_sha256.verify(password, user.password):
+            return None
+
+        return user
 
     def json(self) -> dict:
         return {

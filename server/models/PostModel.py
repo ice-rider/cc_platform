@@ -44,12 +44,10 @@ class PostModel(BaseModel):
         offset: int = 0, 
         limit: int = 10
     ) -> list[PostModel] | None:
-        user = UserModel.get_by_id(user_id)
+        user = UserModel.get_by_id(user_id) if user_id else None
 
-        if user is None:
-            return None
-        
-        if (user.subscription_end is not None or user.subscription_end < TODAY()) and user.role == UserRole.USER:
+        if (user_id is None or user.subscription_end is not None or user.subscription_end < TODAY()) \
+                     and user.role == UserRole.USER):
             posts = cls.query   \
                 .filter_by(cls.required_subscription == False) \
                 .offset(offset) \
