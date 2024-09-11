@@ -8,7 +8,7 @@ export default function Header() {
     return (
         <div className="header">
             <div className="header-logo">
-                <img src="/vite.svg" alt="cc_logo" />
+                <img src="/logo.svg" alt="cc_logo" />
             </div>
             <div className="header-right-part-wrapper">
                 <div className="header-links">
