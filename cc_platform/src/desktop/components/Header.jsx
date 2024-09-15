@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom"
+import Link from "./Link";
+import AuthHeaderView from "./AuthHeaderView";
 
-import AuthHeaderView from "./AuthHeaderView"
-import "../styles/Header.css"
+import "../styles/Header.css";
 
 
 export default function Header() {
@@ -12,22 +12,13 @@ export default function Header() {
             </div>
             <div className="header-right-part-wrapper">
                 <div className="header-links">
-                    <HeaderLink url="/" text="Главная" />
-                    <HeaderLink url="/subscription" text="Подписка" />
-                    <HeaderLink url="/support" text="Поддержка" />
-                    <HeaderLink url="/about" text="О нас" />
+                    <Link url="/" text="Главная" />
+                    <Link url="/subscription" text="Подписка" />
+                    <Link url="/support" text="Поддержка" />
+                    <Link url="/about" text="О нас" />
                 </div>
                 <AuthHeaderView />
             </div>
-        </div>
-    )
-}
-
-function HeaderLink({url, text}) {
-    const navigate = useNavigate();
-    return (
-        <div className="header-link" onClick={() => navigate(url)}>
-            {text}
         </div>
     )
 }

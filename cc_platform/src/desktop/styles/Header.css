@@ -1,40 +1,40 @@
 .header {
     max-width: 100vw;
-    height: 80px;
+    height: 116px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 5%;
+    font-size: 26.5px;
+    padding: 0 130px 0 90px;
     box-sizing: border-box;
+    background: var(--primary-color);
 }
 .header .header-logo {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
-    margin: 0 20px;
+    margin: 25px 0 10px 0;
 }
 
 .header .header-right-part-wrapper {
     position: relative;
     height: 60px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    gap: 35px;
 }
 .header-links {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 36px;
+    margin-left: 10px;
 }
 .header .header-link {
     position: relative;
-    font-size: 20px;
-    margin: 0 10px;
     cursor: pointer;
-    color: white;
+    white-space: nowrap;
+    user-select: none;
 }
 .header .header-link:hover {
     text-decoration: underline;
@@ -46,9 +46,7 @@
 
 .header .header-auth {
     position: relative;
-    font-size: 20px;
-    margin: 0 20px;
-    color: white;
+    width: 150px;
 }
 
 .header .header-profile {

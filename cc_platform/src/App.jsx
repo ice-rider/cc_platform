@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Header from './desktop/components/Header';
 import MainPage from './desktop/pages/MainPage';
+import Account from './desktop/pages/Account';
 
 const Data = createContext(null);
 
@@ -48,6 +49,7 @@ function App() {
             <Header />
             <Routes>
               <Route path='/' element={<MainPage />} />
+              <Route path='/account' element={<Account />} />
             </Routes>
           </Data.Provider>
         </BrowserRouter>

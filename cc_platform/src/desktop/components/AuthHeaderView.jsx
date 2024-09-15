@@ -1,10 +1,17 @@
-import "../styles/Header.css"
 import { useNavigate } from "react-router-dom";
+
 import { useContext, useState } from "react";
 import { Data } from "../../App";
-import { Divider, MenuItem, Menu, Button, Avatar,
-    Typography, Paper, ListItemIcon, ListItemText, MenuList } from "@mui/material";
-import { Settings, Logout, AccountCircleOutlined, AccountCircle } from '@mui/icons-material';
+
+import Link from "./Link";
+import VerticalDivider from "./Divider";
+import { Divider, MenuItem, Menu, 
+    Button, Avatar, Typography, Paper, 
+    ListItemIcon, ListItemText, MenuList } from "@mui/material";
+import { Settings, Logout, 
+    AccountCircleOutlined, AccountCircle } from '@mui/icons-material';
+    
+import "../styles/Header.css";
 
 
 export default function AuthHeaderView() {
@@ -105,12 +112,9 @@ function NoAuthHeaderBlock() {
     const navigate = useNavigate();
     return (
         <div className="header-auth-buttons">
-            <Button variant="contained" color="primary" onClick={() => navigate("/sign-in")}>
-              sign in
-            </Button>
-            <Button variant="outlined" color="primary" onClick={() => navigate("/sign-up")}>
-              sign up
-            </Button>
+            <Link text="Sign in " url="/sign-in" />
+            <VerticalDivider />
+            <Link text="Sign up" url="/sign-up" />
         </div>
     );
 }
