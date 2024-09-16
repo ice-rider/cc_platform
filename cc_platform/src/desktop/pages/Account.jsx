@@ -1,3 +1,4 @@
+import { FollowInfo } from "../components/__init__";
 import "../styles/Account.css";
 
 export default function Account() {
@@ -7,7 +8,7 @@ export default function Account() {
                 hz chto tut ya tozhe ne pridumal
             </div>
             <div className="account-page__info box">
-                <h1>Account info</h1>
+                <FollowInfo user_id="1" />
             </div>
             <div className="account-page__buy box">
                 <h1>Buy</h1>
