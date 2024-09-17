@@ -10,6 +10,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './desktop/components/Header';
 import MainPage from './desktop/pages/MainPage';
 import Account from './desktop/pages/Account';
+import Subscription from "./desktop/pages/Subscription";
+import Support from "./desktop/pages/Support";
+import AboutUs from "./desktop/pages/AboutUs";
+import SignIn from "./desktop/pages/SignIn";
+import SignUp from "./desktop/pages/SignUp";
 
 const Data = createContext(null);
 
@@ -50,6 +55,11 @@ function App() {
             <Routes>
               <Route path='/' element={<MainPage />} />
               <Route path='/account' element={<Account />} />
+              <Route path='/subscription' element={<Subscription/>} />
+              <Route path='/support' element={<Support/>} />
+              <Route path='/about' element={<AboutUs/>} />
+              <Route path='/sign-in' element={<SignIn/>} />
+              <Route path='/sign-up' element={<SignUp/>} />
             </Routes>
           </Data.Provider>
         </BrowserRouter>
