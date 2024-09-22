@@ -8,6 +8,7 @@
     padding: 0 130px 0 90px;
     box-sizing: border-box;
     background: var(--primary-color);
+    backdrop-filter: blur(5px);
 }
 .header .header-logo {
     position: relative;

@@ -1,5 +1,5 @@
 .rounded-field {
-    width: 400px;
+    width: 600px;
     height: 500px;
     background-color: #ffffff; /* Цвет фона, можно изменить по желанию */
     border-radius: 20px; /* Радиус закругления углов */
@@ -7,7 +7,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень, можно изменить или убрать */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Размещаем элементы внизу */
+    justify-content: flex-start; /* Размещаем элементы внизу */
     align-items: center;
     padding: 20px; /* Отступы внутри поля */
     margin: 20px auto; /* Центрирование поля на странице */
