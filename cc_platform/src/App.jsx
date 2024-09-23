@@ -30,11 +30,11 @@ function App() {
   // axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;  for deploy with docker
   axios.defaults.baseURL = "/";
   axios.defaults.headers.post['Content-Type'] = 'application/json';
-  
+
   useEffect(() => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`
   }, [data])
-  
+
   const setterWithObserver = (data) => {
     setData({...data});
     console.log("Observer: ", data);  // TODO: Remove debug logs
@@ -66,7 +66,7 @@ function App() {
       </BrowserView>
 
       <MobileView>
-        <h1> челы на мобилках сосут</h1>
+        <h1> челы на мобилках сосут </h1>
       </MobileView>
       
       {/* toastify container for notifications */}

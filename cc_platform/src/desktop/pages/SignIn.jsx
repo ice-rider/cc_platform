@@ -4,10 +4,8 @@ export default function SignIn() {
     console.log("sign-in") 
     return (
         <div className="rounded-field">
-            <div class="description">
-                <h2>Авторизация</h2>
-            </div>
             <form>
+                <h2>Авторизация</h2>
                 <div className="form-group">
                     <label htmlFor="name">Имя:</label>
                     <input

@@ -1,39 +1,170 @@
 import "../styles/SignUp.css";
+import { useState } from 'react';
+import { Box, Button, TextField, Container, Typography, Paper } from '@mui/material';
+import { toast } from 'react-toastify';
 
 export default function SignUp() {
-    console.log("sign-up") 
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+
+    const [usernameError, setUsernameError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [passwordConfirmError, setPasswordConfirmError] = useState('');
+
+
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const handleUsernameChange = (event) => {
+        let username = event.target.value;
+        setUsernameError('');
+        setUsername(username);
+
+        if (!username) {
+            setUsernameError('Username is required');
+        } else if(username.length < 3) {
+            setUsernameError('Username must be at least 3 characters long');
+        } else {
+            setUsername(username);
+        }
+    }
+    
+    const handleEmailChange = (event) => {
+        let email = event.target.value;
+        setEmailError('');
+        setEmail(email);
+
+        if (!validateEmail(event.target.value)) {
+            setEmailError('Invalid email format');
+        } else {
+            setEmailError(null);
+        }
+    };
+
+    const handlePasswordChange = (event) => {
+        let password = event.target.value;
+        setPasswordError('');
+        setPassword(password);
+
+        if (!password) {
+            setPasswordError('Password is required');
+        } else if (password.length < 8) {
+            setPasswordError('Password must be at least 8 characters long');
+        } else {
+            setPasswordError(null);
+        }
+    }
+    const handlePasswordConfirmChange = (event) => {
+        let password_confirm = event.target.value;
+        setPasswordConfirmError('');
+        setPasswordConfirm(password_confirm);
+
+        if (!password_confirm) {
+            setPasswordConfirmError('Password confirmation is required');
+        } else if (password_confirm !== password) {
+            setPasswordConfirmError('Passwords do not match');
+        } else {
+            setPasswordConfirmError(null);
+        }
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (emailError || usernameError || passwordError || passwordConfirmError) {
+            toast.error('Please correct the errors before submitting.');
+            return;
+        }
+        toast.info('Signing up...');
+    };
+
     return (
-        <div className="rounded-field">
-            <div class="description">
-                <h2>Вход</h2>
-            </div>
-            <form>
-                <div className="form-group">
-                    <label htmlFor="name">Имя:</label>
-                    <input
-                        type="name"
+        <Container maxWidth="sm" sx={{ mt: 4, height: `calc(100vh - 150px)`, justifyContent: 'center' }}>
+            <Paper sx={{ 
+                    backdropFilter: 'blur(15px)', 
+                    border: "1px solid rgba(0, 0, 0, 0.1)", 
+                    borderRadius: '10px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    background: "none",
+                    boxShadow: ' 2px  2px 2px 2px rgba(0, 0, 0, 0.05), \
+                                -2px -2px 2px 2px rgba(0, 0, 0, 0.05), \
+                                -2px  2px 2px 2px rgba(0, 0, 0, 0.05), \
+                                 2px -2px 2px 2px rgba(0, 0, 0, 0.05)' }}>
+                <Typography variant="h4" mt={2}>
+                    Sign up
+                </Typography>
+                <Box component="form" onSubmit={handleSubmit} sx={{ padding: '10px 25px', borderRadius: '10px' }}>
+                    <TextField
+                        error={!!usernameError}
+                        helperText={usernameError}
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        value={username}
+                        onChange={handleUsernameChange}
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Почта:</label>
-                    <input
-                        type="email"
+                    <TextField
+                        error={!!emailError}
+                        helperText={emailError}
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        value={email}
+                        onChange={handleEmailChange}
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Пароль:</label>
-                    <input
+                    <TextField
+                        error={!!passwordError}
+                        helperText={passwordError}
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
                         type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={handlePasswordChange}
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Повторите пароль:</label>
-                    <input
+                    <TextField
+                        error={!!passwordConfirmError}
+                        helperText={passwordConfirmError}
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="passwordConfirm"
+                        label="Confirm Password"
                         type="password"
+                        id="password-confirm"
+                        value={passwordConfirm}
+                        onChange={handlePasswordConfirmChange}
                     />
-                </div>
-                <button type="submit">Зарегистрироваться</button>
-            </form>
-        </div>
-    )
-};
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Sign Up
+                    </Button>
+                </Box>
+            </Paper>
+        </Container>
+    );
+}
+
