@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-from sqlalchemy import or_
-
 from .db import db, BaseModel
-from .config import UserSubscription, UserRole, TODAY
+from .config import UserRole, TODAY
 from .UserModel import UserModel
 
 
@@ -47,7 +45,7 @@ class PostModel(BaseModel):
         user = UserModel.get_by_id(user_id) if user_id else None
 
         if (user_id is None or user.subscription_end is not None or user.subscription_end < TODAY()) \
-                     and user.role == UserRole.USER):
+                     and user.role == UserRole.USER:
             posts = cls.query   \
                 .filter_by(cls.required_subscription == False) \
                 .offset(offset) \
