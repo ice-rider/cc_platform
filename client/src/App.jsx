@@ -20,15 +20,16 @@ const Data = createContext(null);
 
 function App() {
   const [data, setData] = useState({
-    auth:          localStorage.getItem("auth") === "true" || false,
-    access_token:  localStorage.getItem("access_token"),
-    avatar:        localStorage.getItem("avatar"),
-    username:      localStorage.getItem("username"),
-    user_id:       localStorage.getItem('user_id')
+    auth:              localStorage.getItem("auth") === "true" || false,
+    access_token:      localStorage.getItem("access_token") || null,
+    user_id:           localStorage.getItem('user_id'),
+    username:          localStorage.getItem("username"),
+    role:              localStorage.getItem("role") || "USER",
+    subscription_end:  localStorage.getItem("subscription_end") || null,
   })
 
   // axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;  for deploy with docker
-  axios.defaults.baseURL = "/";
+  axios.defaults.baseURL = "/api";
   axios.defaults.headers.post['Content-Type'] = 'application/json';
 
   useEffect(() => {

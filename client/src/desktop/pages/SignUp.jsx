@@ -1,15 +1,22 @@
 import "../styles/SignUp.css";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Box, Button, TextField, Container, Typography, Paper } from '@mui/material';
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { Data } from "../../App";
+
 
 export default function SignUp() {
-    const [username, setUsername] = useState('');
+    const navigate = useNavigate();
+    const context = useContext(Data);
+
+    const [login, setLogin] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
-    const [usernameError, setUsernameError] = useState('');
+    const [loginError, setLoginError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [passwordConfirmError, setPasswordConfirmError] = useState('');
@@ -21,16 +28,16 @@ export default function SignUp() {
     };
 
     const handleUsernameChange = (event) => {
-        let username = event.target.value;
-        setUsernameError('');
-        setUsername(username);
+        let login = event.target.value;
+        setLoginError('');
+        setLogin(login);
 
-        if (!username) {
-            setUsernameError('Username is required');
-        } else if(username.length < 3) {
-            setUsernameError('Username must be at least 3 characters long');
+        if (!login) {
+            setLoginError('Username is required');
+        } else if(login.length < 3) {
+            setLoginError('Username must be at least 3 characters long');
         } else {
-            setUsername(username);
+            setLogin(login);
         }
     }
     
@@ -75,11 +82,21 @@ export default function SignUp() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (emailError || usernameError || passwordError || passwordConfirmError) {
+        if (emailError || loginError || passwordError || passwordConfirmError) {
             toast.error('Please correct the errors before submitting.');
             return;
         }
-        toast.info('Signing up...');
+        axios.post('/auth/register', { username: login, email, password })
+            .then(response => {
+                if (response.data.success) {
+                    toast.success('Account created successfully. Please sign in.');
+                } else {
+                    toast.error(response.data.message);
+                }
+            })
+            .catch(error => {
+                toast.error(error.response.data.message);
+            });
     };
 
     return (
@@ -101,8 +118,8 @@ export default function SignUp() {
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ padding: '10px 25px', borderRadius: '10px' }}>
                     <TextField
-                        error={!!usernameError}
-                        helperText={usernameError}
+                        error={!!loginError}
+                        helperText={loginError}
                         margin="normal"
                         required
                         fullWidth
@@ -111,7 +128,7 @@ export default function SignUp() {
                         name="username"
                         autoComplete="username"
                         autoFocus
-                        value={username}
+                        value={login}
                         onChange={handleUsernameChange}
                     />
                     <TextField

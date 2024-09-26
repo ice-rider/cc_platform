@@ -1,26 +1,33 @@
 import "../styles/SignIn.css";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Box, Button, TextField, Container, Typography, Paper } from '@mui/material';
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { Data } from "../../App";
+
 
 export default function SignIn() {
-    const [username, setUsername] = useState('');
+    const navigate = useNavigate();
+    const context = useContext(Data);
+
+    const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
-    const [usernameError, setUsernameError] = useState('');
+    const [loginError, setLoginError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
     const handleUsernameChange = (event) => {
         let username = event.target.value;
-        setUsernameError('');
-        setUsername(username);
+        setLoginError('');
+        setLogin(username);
 
         if (!username) {
-            setUsernameError('Username is required');
+            setLoginError('Username is required');
         } else if(username.length < 3) {
-            setUsernameError('Username must be at least 3 characters long');
+            setLoginError('Username must be at least 3 characters long');
         } else {
-            setUsername(username);
+            setLogin(username);
         }
     }
 
@@ -40,11 +47,29 @@ export default function SignIn() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (usernameError || passwordError) {
+        if (loginError || passwordError) {
             toast.error('Please correct the errors before submitting.');
             return;
         }
-        toast.info('Signing in...');
+        axios.post('/auth/login', { username: login, password })
+            .then(response => {
+                if (response.data.success) {
+                    toast.success('Login successful. Redirecting...');
+                    context.setter({
+                        access_token: response.data.access_token,
+                        user_id: response.data.user.id,
+                        username: response.data.user.username,
+                        role: response.data.user.role,
+                        subscription_end: response.data.user.subscription_end
+                    })
+                    navigate('/account');
+                } else {
+                    toast.error(response.data.message);
+                }
+            })
+            .catch(error => {
+                toast.error(error.response.data.message);
+            });
     };
 
     return (
@@ -66,8 +91,8 @@ export default function SignIn() {
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ padding: '10px 25px', borderRadius: '10px' }}>
                     <TextField
-                        error={!!usernameError}
-                        helperText={usernameError}
+                        error={!!loginError}
+                        helperText={loginError}
                         margin="normal"
                         required
                         fullWidth
@@ -76,7 +101,7 @@ export default function SignIn() {
                         name="username"
                         autoComplete="username"
                         autoFocus
-                        value={username}
+                        value={login}
                         onChange={handleUsernameChange}
                     />
                     <TextField

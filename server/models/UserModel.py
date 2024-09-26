@@ -37,8 +37,7 @@ class UserModel(BaseModel):
         return {
             "id": self.id,
             "username": self.username,
-            "email": self.email,
-            "role": self.rolea.value,
+            "role": self.role.value,
             "subscription": self.subscription.strftime("%d.%m.%Y") \
                 if self.subscription_end is not None else None
         }
