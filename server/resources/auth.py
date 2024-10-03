@@ -47,8 +47,9 @@ class Register(BaseResource):
 
         user = UserModel(username, password, email)
         user.save()
-
+        access_token = jwt.create_access_token(identity=user.json())
         return {
             "message": "User created successfully",
+            "access_token": access_token,
             "user": user.json()
         }, HTTPStatus.CREATED

@@ -90,6 +90,14 @@ export default function SignUp() {
             .then(response => {
                 if (response.data.success) {
                     toast.success('Account created successfully. Please sign in.');
+                    context.setter({
+                        access_token: response.data.access_token,
+                        user_id: response.data.user.id,
+                        username: response.data.user.username,
+                        role: response.data.user.role,
+                        subscription_end: response.data.user.subscription_end
+                    })
+                    navigate('/account');
                 } else {
                     toast.error(response.data.message);
                 }
@@ -97,7 +105,7 @@ export default function SignUp() {
             .catch(error => {
                 toast.error(error.response.data.message);
             });
-    };
+        };
 
     return (
         <Container maxWidth="sm" sx={{ mt: 4, height: `calc(100vh - 150px)`, justifyContent: 'center' }}>
