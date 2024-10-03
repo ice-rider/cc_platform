@@ -19,10 +19,10 @@ export default function AuthHeaderView() {
 
     return (
         <div className="header-auth">
-            { user.auth ?
-                <AuthHeaderBlock user={user} />
-                : <NoAuthHeaderBlock />
-            }
+                { user.auth ?
+                    <AuthHeaderBlock user={user} />
+                    : <NoAuthHeaderBlock />
+                }
         </div>
     )
 }
