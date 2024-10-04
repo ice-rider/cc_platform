@@ -9,7 +9,7 @@ import { Data } from "../../App";
 
 export default function SignIn() {
     const navigate = useNavigate();
-    const context = useContext(Data);
+    const { setter } = useContext(Data);
 
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
@@ -54,9 +54,9 @@ export default function SignIn() {
         axios.post('/auth/login', { username: login, password })
             .then(response => {
                 console.log(response)
-                if (response.data.success) {
+                if (response.status === 200) {
                     toast.success('Login successful. Redirecting...');
-                    context.setter({
+                    setter({
                         access_token: response.data.access_token,
                         user_id: response.data.user.id,
                         username: response.data.user.username,
@@ -69,6 +69,7 @@ export default function SignIn() {
                 }
             })
             .catch(error => {
+                console.error(error)
                 toast.error(error.response.data.message);
             });
     };

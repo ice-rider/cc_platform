@@ -2,6 +2,7 @@ from http import HTTPStatus
 
 from flask import request
 from flask_jwt_extended import create_access_token
+from passlib.hash import pbkdf2_sha256
 
 from .api import BaseResource
 from ..models import UserModel
@@ -46,7 +47,12 @@ class Register(BaseResource):
                 "message": "missed fields which required"
             }, HTTPStatus.BAD_REQUEST
 
-        user = UserModel(username, password, email)
+        user = UserModel(
+            username, 
+            pbkdf2_sha256.hash(password), 
+            email
+        )
+        
         print("user: ", user.json())
         access_token = create_access_token(identity=user.json())
         return {
