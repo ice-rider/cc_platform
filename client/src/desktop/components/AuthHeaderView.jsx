@@ -6,7 +6,7 @@ import { Data } from "../../App";
 import Link from "./Link";
 import VerticalDivider from "./Divider";
 import { Divider, MenuItem, Menu, 
-    Button, Avatar, Typography, Paper, 
+    Avatar, Typography, Paper, 
     ListItemIcon, ListItemText, MenuList } from "@mui/material";
 import { Settings, Logout, 
     AccountCircleOutlined, AccountCircle } from '@mui/icons-material';
@@ -15,11 +15,10 @@ import "../styles/Header.css";
 
 
 export default function AuthHeaderView() {
-    const user = useContext(Data);
-
+    const user = useContext(Data) || { auth: false };
     return (
         <div className="header-auth">
-                { user.auth ?
+                { user.auth ? 
                     <AuthHeaderBlock user={user} />
                     : <NoAuthHeaderBlock />
                 }
@@ -47,6 +46,7 @@ function AuthHeaderBlock({ user }) {
 
 function HeaderProfile({user, handleClick}) {
     const username = user.username || "Anonymous";
+    const avatar_url = user.avatar || null;
     return (
         <div className="header-profile" onClick={handleClick} >
             { user.avatar ?

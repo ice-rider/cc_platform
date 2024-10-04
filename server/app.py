@@ -19,7 +19,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
 
 # configure jwt manager key
-app.config["JWT_SECRET_KEY"] = random.choices(string.printable, k=100)
+app.config["JWT_SECRET_KEY"] = "".join(random.choices(string.printable, k=100))
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(days=3)
 
 # initialization app to db

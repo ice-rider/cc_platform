@@ -1,8 +1,9 @@
 from http import HTTPStatus
 
 from flask import request
+from flask_jwt_extended import create_access_token
 
-from .api import BaseResource, jwt
+from .api import BaseResource
 from ..models import UserModel
 
 
@@ -13,12 +14,12 @@ class Login(BaseResource):
     def post(cls):
         json = request.get_json()
         user = UserModel.auth(
-            json.get("login"),
+            json.get("username"),
             json.get("password")
         )
 
         if user:
-            access_token = jwt.create_access_token(identity=user.json())
+            access_token = create_access_token(identity=user.json())
             return {
                 "message": "Login successful",
                 "user": user.json(),
@@ -36,7 +37,7 @@ class Register(BaseResource):
     @classmethod
     def post(cls):
         json = request.get_json()
-        username = json.get("login")
+        username = json.get("username")
         password = json.get("password")
         email = json.get("email")
 
@@ -46,8 +47,8 @@ class Register(BaseResource):
             }, HTTPStatus.BAD_REQUEST
 
         user = UserModel(username, password, email)
-        user.save()
-        access_token = jwt.create_access_token(identity=user.json())
+        print("user: ", user.json())
+        access_token = create_access_token(identity=user.json())
         return {
             "message": "User created successfully",
             "access_token": access_token,

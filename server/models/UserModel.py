@@ -20,9 +20,11 @@ class UserModel(BaseModel):
         self.username = username
         self.password = password
         self.email = email
+        self.save()
 
     @classmethod
     def auth(cls, email: str, password: str) -> UserModel | None:
+
         user = cls.query.filter_by(email=email).first()
 
         if user is None:
