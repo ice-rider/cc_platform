@@ -61,7 +61,7 @@ function App() {
       <BrowserView>
         <BrowserRouter>
           {/* desktop version */}
-          {/* <Data.Provider value={{user: data, setter: setterWithObserver}}> */}
+          <Data.Provider value={{user: data, setter: setterWithObserver}}>
             <Header />
             <Routes>
               <Route path='/*' element={<MainPage />} />
@@ -72,7 +72,7 @@ function App() {
               <Route path='/sign-in' element={<SignIn/>} />
               <Route path='/sign-up' element={<SignUp/>} />
             </Routes>
-          {/* </Data.Provider> */}
+          </Data.Provider>
         </BrowserRouter>
       </BrowserView>
 

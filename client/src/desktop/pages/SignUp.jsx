@@ -9,7 +9,7 @@ import { Data } from "../../App";
 
 export default function SignUp() {
     const navigate = useNavigate();
-    const context = useContext(Data);
+    const { setter } = useContext(Data);
 
     const [login, setLogin] = useState('');
     const [email, setEmail] = useState('');
@@ -88,9 +88,10 @@ export default function SignUp() {
         }
         axios.post('/auth/register', { username: login, email, password })
             .then(response => {
-                if (response.data.success) {
+                console.log(response)
+                if (response.status === 201) {
                     toast.success('Account created successfully. Please sign in.');
-                    context.setter({
+                    setter({
                         access_token: response.data.access_token,
                         user_id: response.data.user.id,
                         username: response.data.user.username,
@@ -99,10 +100,11 @@ export default function SignUp() {
                     })
                     navigate('/account');
                 } else {
-                    toast.error(response.data.message);
+                    toast.error(response.status.toString() + response.data.message);
                 }
             })
             .catch(error => {
+                console.log(error)
                 toast.error(error.response.data.message);
             });
         };
@@ -117,10 +119,7 @@ export default function SignUp() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     background: "none",
-                    boxShadow: ' 2px  2px 2px 2px rgba(0, 0, 0, 0.05), \
-                                -2px -2px 2px 2px rgba(0, 0, 0, 0.05), \
-                                -2px  2px 2px 2px rgba(0, 0, 0, 0.05), \
-                                 2px -2px 2px 2px rgba(0, 0, 0, 0.05)' }}>
+                    boxShadow: '2px  2px 2px 2px rgba(0, 0, 0, 0.05), -2px -2px 2px 2px rgba(0, 0, 0, 0.05), -2px  2px 2px 2px rgba(0, 0, 0, 0.05), 2px -2px 2px 2px rgba(0, 0, 0, 0.05)' }}>
                 <Typography variant="h4" mt={2}>
                     Sign up
                 </Typography>

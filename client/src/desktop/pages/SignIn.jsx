@@ -53,6 +53,7 @@ export default function SignIn() {
         }
         axios.post('/auth/login', { username: login, password })
             .then(response => {
+                console.log(response)
                 if (response.data.success) {
                     toast.success('Login successful. Redirecting...');
                     context.setter({
@@ -82,10 +83,7 @@ export default function SignIn() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     background: "none",
-                    boxShadow: ' 2px  2px 2px 2px rgba(0, 0, 0, 0.05), \
-                                -2px -2px 2px 2px rgba(0, 0, 0, 0.05), \
-                                -2px  2px 2px 2px rgba(0, 0, 0, 0.05), \
-                                 2px -2px 2px 2px rgba(0, 0, 0, 0.05)' }}>
+                    boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.05), -2px -2px 2px 2px rgba(0, 0, 0, 0.05), -2px  2px 2px 2px rgba(0, 0, 0, 0.05), 2px -2px 2px 2px rgba(0, 0, 0, 0.05)' }}>
                 <Typography variant="h4" mt={2}>
                     Sign in
                 </Typography>
@@ -96,7 +94,7 @@ export default function SignIn() {
                         margin="normal"
                         required
                         fullWidth
-                        id="username"
+                        id="email"
                         label="Username"
                         name="username"
                         autoComplete="username"
