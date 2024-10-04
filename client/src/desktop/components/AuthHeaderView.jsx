@@ -15,12 +15,14 @@ import "../styles/Header.css";
 
 
 export default function AuthHeaderView() {
-    const user = useContext(Data) || { auth: false };
+    const { user } = useContext(Data);
+    console.table(user);
     return (
         <div className="header-auth">
                 { user.auth ? 
                     <AuthHeaderBlock user={user} />
-                    : <NoAuthHeaderBlock />
+                    :
+                    <NoAuthHeaderBlock />
                 }
         </div>
     )
@@ -71,6 +73,8 @@ function HeaderProfileMenu ({ anchorEl, open, handleClose }) {
             case "Logout":
                 navigate("/sign-out");
                 break;
+            default:
+                break;
         }
     }
     return (
@@ -109,7 +113,6 @@ function HeaderProfileMenu ({ anchorEl, open, handleClose }) {
 
 
 function NoAuthHeaderBlock() {
-    const navigate = useNavigate();
     return (
         <div className="header-auth-buttons">
             <Link text="Sign in " url="/sign-in" />

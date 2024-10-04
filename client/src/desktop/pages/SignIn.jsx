@@ -58,6 +58,7 @@ export default function SignIn() {
                     toast.success('Login successful. Redirecting...');
                     setter({
                         access_token: response.data.access_token,
+                        auth: true,
                         user_id: response.data.user.id,
                         username: response.data.user.username,
                         role: response.data.user.role,

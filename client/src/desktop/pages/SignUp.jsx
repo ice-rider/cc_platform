@@ -93,6 +93,7 @@ export default function SignUp() {
                     toast.success('Account created successfully. Please sign in.');
                     setter({
                         access_token: response.data.access_token,
+                        auth: true,
                         user_id: response.data.user.id,
                         username: response.data.user.username,
                         role: response.data.user.role,
