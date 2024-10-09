@@ -54,7 +54,7 @@ function HeaderProfile({user, handleClick}) {
             { user.avatar ?
                 <Avatar alt={user.username} src={avatar_url} /> : <AccountCircleOutlined />
             }
-            <Typography variant="h6"> {username} </Typography>
+            <Typography variant="h5"> {username} </Typography>
         </div>
     )
 }
@@ -65,7 +65,7 @@ function HeaderProfileMenu ({ anchorEl, open, handleClose }) {
         handleClose();
         switch (text) {
             case "Profile":
-                navigate("/profile");
+                navigate("/account");
                 break;
             case "Settings":
                 navigate("/settings");

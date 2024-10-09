@@ -15,6 +15,7 @@ import Support from "./desktop/pages/Support";
 import AboutUs from "./desktop/pages/AboutUs";
 import SignIn from "./desktop/pages/SignIn";
 import SignUp from "./desktop/pages/SignUp";
+import SignOut from "./desktop/pages/SignOut";
 
 import MobileHeader from "./mobile/components/MobileHeader";
 import MobileMainPage from "./mobile/pages/MobileMainPage";
@@ -71,6 +72,7 @@ function App() {
               <Route path='/about' element={<AboutUs/>} />
               <Route path='/sign-in' element={<SignIn/>} />
               <Route path='/sign-up' element={<SignUp/>} />
+              <Route path='/sign-out' element={<SignOut/>} />
             </Routes>
           </Data.Provider>
         </BrowserRouter>
@@ -89,6 +91,7 @@ function App() {
               <Route path='/support' element={<MobileSupport />} />
               <Route path='/sign-in' element={<MobileSignIn/>} />
               <Route path='/sign-up' element={<MobileSignUp/>} />
+              <Route path='/sign-out' element={<SignOut/>} />
             </Routes>
           </Data.Provider>
         </BrowserRouter>

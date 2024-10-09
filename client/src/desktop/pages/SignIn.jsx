@@ -11,23 +11,23 @@ export default function SignIn() {
     const navigate = useNavigate();
     const { setter } = useContext(Data);
 
-    const [login, setLogin] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const [loginError, setLoginError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
     const handleUsernameChange = (event) => {
-        let username = event.target.value;
+        let email = event.target.value;
         setLoginError('');
-        setLogin(username);
+        setEmail(email);
 
-        if (!username) {
+        if (!email) {
             setLoginError('Username is required');
-        } else if(username.length < 3) {
+        } else if(email.length < 3) {
             setLoginError('Username must be at least 3 characters long');
         } else {
-            setLogin(username);
+            setEmail(email);
         }
     }
 
@@ -51,7 +51,7 @@ export default function SignIn() {
             toast.error('Please correct the errors before submitting.');
             return;
         }
-        axios.post('/auth/login', { username: login, password })
+        axios.post('/auth/login', { username: email, password })
             .then(response => {
                 console.log(response)
                 if (response.status === 200) {
@@ -97,11 +97,11 @@ export default function SignIn() {
                         required
                         fullWidth
                         id="email"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
+                        label="email"
+                        name="email"
+                        autoComplete="email"
                         autoFocus
-                        value={login}
+                        value={email}
                         onChange={handleUsernameChange}
                     />
                     <TextField
@@ -114,7 +114,7 @@ export default function SignIn() {
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
+                        autoComplete="password"
                         value={password}
                         onChange={handlePasswordChange}
                     />
