@@ -40,7 +40,7 @@ function App() {
   })
 
   // axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;  for deploy with docker
-  axios.defaults.baseURL = "https://upgraded-halibut-66v6p9wq657crrvv-5000.app.github.dev/api";
+  axios.defaults.baseURL = "/api";
   axios.defaults.headers.post['Content-Type'] = 'application/json';
 
   useEffect(() => {
