@@ -19,12 +19,14 @@
 }
 
 .form-group label {
+    color: white;
     display: block;
     margin-bottom: 3px;
     
 }
 
 .form-group input {
+    color: white;
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

@@ -4,15 +4,14 @@
 
 .mobile-header {
     max-width: 100vw;
-    height: 75px;
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 26.5px;
+    font-size: 2.5px;
     padding: 20px 10px;
     box-sizing: border-box;
     background: var(--primary-color);
-    backdrop-filter: blur(5px);
 }
 
 .mobile-header-logo img {
@@ -25,15 +24,16 @@
 
 .mobile-header-menu-icon img {
     height: 30px;
+    margin-bottom: 9px;
 }
 
 .curtain {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 200px;
+    width: 175px;
     height: 100%;
-    background-color: rgb(18, 18, 18);
+    background-color: #101010;
     overflow: hidden;
     transition: right 0.5s ease-in-out;
     z-index: 1;
@@ -45,7 +45,7 @@
 
 .curtain-close-icon {
     position: absolute;
-    top: 22px;
+    top: 15px;
     left: 162px;
     cursor: pointer;
 

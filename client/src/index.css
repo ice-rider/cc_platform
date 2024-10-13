@@ -13,23 +13,25 @@ code {
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --primary-color: #E1D3FFD9;
+  --primary-color: #ffffff;
   --secondary-color: white;
 }
 
 body {
-  background: url("./assets/background.jpg");
-  background-size: cover;
+  background: url('./assets/background.jpg') no-repeat 0/cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: absolute;
   margin: 0;
+  backdrop-filter: brightness(0.3);
   overflow-x: hidden;
   height: 100vh;
 }
