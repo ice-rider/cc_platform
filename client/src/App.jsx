@@ -54,7 +54,7 @@ function App() {
   })
 
   // axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;  for deploy with docker
-  axios.defaults.baseURL = "https://bug-free-space-orbit-66v6p9wq6rjfxx4p-5000.app.github.dev/api";
+  axios.defaults.baseURL = "https://bug-free-fortnight-7vv9xq45jx4wfx7q-5000.app.github.dev/api";
   axios.defaults.headers.post['Content-Type'] = 'application/json';
 
   useEffect(() => {

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import base64
+
 from passlib.hash import pbkdf2_sha256
 
 from .db import db, BaseModel
@@ -23,6 +25,10 @@ class UserModel(BaseModel):
         self.username = username
         self.password = password
         self.email = email
+        
+        avatar = PhotoModel()
+        avatar.save()
+        self.avatar_id = avatar.id
         self.save()
 
     @classmethod
@@ -45,8 +51,13 @@ class UserModel(BaseModel):
             "role": self.role.value,
             "subscription": self.subscription.strftime("%d.%m.%Y") \
                 if self.subscription_end is not None else None,
-            "avatar": self.avatar_id
+            "avatar": self.avatar
         }
+        
+    @property
+    def avatar(self) -> str | None:
+        avatar = PhotoModel.get_by_id(self.avatar_id)
+        return base64.b64encode(avatar.binary).decode('utf-8')
 
     def change_role(self, role: UserRole) -> None:
         self.role = role
@@ -60,9 +71,8 @@ class UserModel(BaseModel):
         if new_password:
             self.password = new_password
         if new_avatar:
-            avatar = PhotoModel(
-                binary = new_avatar
-            )
+            avatar = PhotoModel.get_by_id(self.avatar_id)
+            avatar.binary = new_avatar
             avatar.save()
             self.avatar_id = avatar.id
         self.save()

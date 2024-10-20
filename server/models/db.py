@@ -22,7 +22,7 @@ class BaseModel(db.Model):  # type: ignore
         return str(self.json())
     
     @classmethod
-    def get_by_id(cls) -> BaseModel | None:
+    def get_by_id(cls, id) -> BaseModel | None:
         return cls.query.get(id)
 
     def save(self) -> None:
