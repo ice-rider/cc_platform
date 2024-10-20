@@ -1,6 +1,6 @@
 import "../styles/SignIn.css";
 import { useState, useContext } from 'react';
-import { Box, Button, TextField, Container, Typography, Paper } from '@mui/material';
+import { Box, Button, TextField, Container, Typography, Paper, Divider } from '@mui/material';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -23,9 +23,9 @@ export default function SignIn() {
         setEmail(email);
 
         if (!email) {
-            setLoginError('Username is required');
+            setLoginError('Имя пользователя не заполнено');
         } else if(email.length < 3) {
-            setLoginError('Username must be at least 3 characters long');
+            setLoginError('Имя пользователя должно содержать более 3 букв');
         } else {
             setEmail(email);
         }
@@ -37,9 +37,9 @@ export default function SignIn() {
         setPassword(password);
 
         if (!password) {
-            setPasswordError('Password is required');
+            setPasswordError('Пароль не заполнен');
         } else if (password.length < 8) {
-            setPasswordError('Password must be at least 8 characters long');
+            setPasswordError('Длина пароля должна превышать 7 символов');
         } else {
             setPasswordError(null);
         }
@@ -48,20 +48,22 @@ export default function SignIn() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (loginError || passwordError) {
-            toast.error('Please correct the errors before submitting.');
+            toast.error('Проверьте правильность заполнения форма перед отправкой');
             return;
         }
         axios.post('/auth/login', { username: email, password })
             .then(response => {
                 console.log(response)
                 if (response.status === 200) {
-                    toast.success('Login successful. Redirecting...');
+                    toast.success('Успешная авторизация. Переадресация...');
                     setter({
-                        access_token: response.data.access_token,
-                        auth: true,
-                        user_id: response.data.user.id,
-                        username: response.data.user.username,
-                        role: response.data.user.role,
+                        auth:             true,
+                        access_token:     response.data.access_token,
+                        user_id:          response.data.user.id,
+                        username:         response.data.user.username,
+                        email:            response.data.user.email,
+                        avatar:           response.data.user.avatar,
+                        role:             response.data.user.role,
                         subscription_end: response.data.user.subscription_end
                     })
                     navigate('/account');
@@ -71,7 +73,7 @@ export default function SignIn() {
             })
             .catch(error => {
                 console.error(error)
-                toast.error(error.response.data.message);
+                toast.error(error.message);
             });
     };
 
@@ -87,7 +89,7 @@ export default function SignIn() {
                     background: "none",
                     boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.05), -2px -2px 2px 2px rgba(0, 0, 0, 0.05), -2px  2px 2px 2px rgba(0, 0, 0, 0.05), 2px -2px 2px 2px rgba(0, 0, 0, 0.05)' }}>
                 <Typography variant="h4" mt={2}>
-                    Sign in
+                    Авторизация
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ padding: '10px 25px', borderRadius: '10px' }}>
                     <TextField
@@ -97,7 +99,7 @@ export default function SignIn() {
                         required
                         fullWidth
                         id="email"
-                        label="email"
+                        label="Имя пользователя"
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -111,7 +113,7 @@ export default function SignIn() {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label="Пароль"
                         type="password"
                         id="password"
                         autoComplete="password"
@@ -124,8 +126,12 @@ export default function SignIn() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign In
+                        Войти
                     </Button>
+                    <Divider sx={{ mt: 0, mb: 1 }} />
+                    <div class="bt" sx={{ mb: 2 }}>
+                        <span>Еще не зарегестрировались? <span className="a" onClick={() => navigate('/sign-up')}>Регистрация</span></span>
+                    </div>
                 </Box>
             </Paper>
         </Container>

@@ -1,14 +1,15 @@
 .header {
     max-width: 100vw;
-    height: 116px;
+    height: 90px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 26.5px;
-    padding: 0 130px 0 90px;
+    font-size: 18px;
+    padding: 0 50px 0 90px;
     box-sizing: border-box;
-    background: var(--primary-color);
-    backdrop-filter: blur(5px);
+    background: white;
+    color: var(--primary-color);
+    border-bottom: 1px solid #eee
 }
 .header .header-logo {
     position: relative;
@@ -20,13 +21,16 @@
 
 .header .header-right-part-wrapper {
     position: relative;
-    height: 60px;
+    height: 90px;
     display: flex;
-    gap: 35px;
+    gap: 25px;
 }
 .header-links {
     position: relative;
     display: grid;
+    justify-content: flex-end;
+    align-items: center;
+    height: 90px;
     grid-template-columns: repeat(4, auto);
     gap: 36px;
     margin-left: 10px;
@@ -47,6 +51,8 @@
 
 .header .header-auth {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .header .header-profile {
@@ -61,15 +67,7 @@
 .header-profile svg {
     width: 40px;
     height: 40px;
-    margin-right: 10px;
 }
 .header .header-profile:hover {
     background-color: rgba(0, 0, 0, 0.1);
-}
-
-.header .header-auth-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 175px;
 }

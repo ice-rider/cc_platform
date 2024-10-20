@@ -1,6 +1,6 @@
 import "../styles/SignUp.css";
 import { useState, useContext } from 'react';
-import { Box, Button, TextField, Container, Typography, Paper } from '@mui/material';
+import { Box, Button, TextField, Container, Typography, Paper, Divider } from '@mui/material';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -92,11 +92,12 @@ export default function SignUp() {
                 if (response.status === 201) {
                     toast.success('Account created successfully. Please sign in.');
                     setter({
-                        access_token: response.data.access_token,
-                        auth: true,
-                        user_id: response.data.user.id,
-                        username: response.data.user.username,
-                        role: response.data.user.role,
+                        auth:             true,
+                        access_token:     response.data.access_token,
+                        user_id:          response.data.user.id,
+                        username:         response.data.user.username,
+                        email:            response.data.user.email,
+                        role:             response.data.user.role,
                         subscription_end: response.data.user.subscription_end
                     })
                     navigate('/account');
@@ -106,7 +107,7 @@ export default function SignUp() {
             })
             .catch(error => {
                 console.log(error)
-                toast.error(error.response.data.message);
+                toast.error(error.message);
             });
         };
 
@@ -132,7 +133,7 @@ export default function SignUp() {
                         required
                         fullWidth
                         id="username"
-                        label="Username"
+                        label="Имя пользователя"
                         name="username"
                         autoComplete="username"
                         autoFocus
@@ -146,7 +147,7 @@ export default function SignUp() {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label="Почтовый адрес"
                         name="email"
                         autoComplete="email"
                         value={email}
@@ -159,7 +160,7 @@ export default function SignUp() {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label="Пароль"
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -173,7 +174,7 @@ export default function SignUp() {
                         required
                         fullWidth
                         name="passwordConfirm"
-                        label="Confirm Password"
+                        label="Подтверждение пароля"
                         type="password"
                         id="password-confirm"
                         value={passwordConfirm}
@@ -187,6 +188,10 @@ export default function SignUp() {
                     >
                         Sign Up
                     </Button>
+                    <Divider sx={{ mt: 0, mb: 1 }} />
+                    <div className="bt" sx={{ mb: 2 }}>
+                        <span>Уже зарегестрированы? <span className="a" onClick={() => navigate('/sign-in')}>Авторизация</span></span>
+                    </div>
                 </Box>
             </Paper>
         </Container>

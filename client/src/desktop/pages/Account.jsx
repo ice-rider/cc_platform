@@ -1,53 +1,42 @@
 import { Data } from "../../App";
 import { useContext } from "react";
+import { Avatar, Button, TextField } from "@mui/material";
+import { PhotoCameraOutlined } from "@mui/icons-material";
 import "../styles/Account.css";
 
 export default function Account() {
-    return (
-        <div className="account-page__grid">
-            <div className="account-page__lc box">
-                hz chto tut ya tozhe ne pridumal
-            </div>
-            <div className="account-page__info box">
-                <SubscriptionInfo />
-            </div>
-            <div className="account-page__buy box">
-                <h1>Buy</h1>
-            </div>
-        </div>
-    )
-}
-
-function SubscriptionInfo () {
     const { user } = useContext(Data);
-    const sub_status = "active";
-    const sub_remained = "3 days";
-    const sub_expired = "after tomorrow";
+    const sub_status = user.subsription_end > new Date() ? "активна" : "неактивна";
+    const sub_final_date = user.subsription_end | "отсутствует";
+    const sub_have = 0;
     return (
-        <table className="subscription-info">
-            <thead>
-                <tr>
-                    <th colSpan={2}> Информация о подписке </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> </td> 
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>Статус подписки: </td>
-                    <td>{sub_status}</td>
-                </tr>
-                <tr>
-                    <td>Осталось: </td>
-                    <td>{ sub_remained }</td>
-                </tr>
-                <tr>
-                    <td>Истекает: </td>
-                    <td>{ sub_expired }</td>
-                </tr>
-            </tbody>
-        </table>
+        <div className="account-page-block">
+            <div className="acc-box">
+                <div className="profile-avatar">
+                    <Avatar 
+                        src={user.avatar}
+                        alt={user.username}
+                        sx={{ width: "225px", height: "225px", margin: "50px 0" }} />
+                    <Button variant="contained">
+                        <PhotoCameraOutlined /> &nbsp; Загрузить фото
+                    </Button>
+                    <Button variant="outlined" sx={{ position: "relative", width: "60%", left: "20%", mt: 3 }}>
+                        Удалить
+                    </Button>
+                </div>
+                <div className="profile-info">
+                    <TextField label="имя пользователя:" value={user.username} variant="standard" fullWidth size="medium" />
+                    <TextField label="почтовый адрес:" value={user.email} variant="standard" fullWidth size="medium" />
+                    <TextField label="новый пароль:" value={user.email} variant="standard" fullWidth size="medium" />
+                    <TextField label="подтвердите пароль:" value={user.email} variant="standard" fullWidth size="medium" />
+                </div>
+                <div className="profile-subinfo">
+                    <TextField label="статус подписки" value={sub_status} variant="standard" fullWidth size="medium" disabled />
+                    <TextField label="дата окончания:" value={sub_final_date} variant="standard" fullWidth size="medium" disabled />
+                    <TextField label="осталось:" value={sub_have} variant="standard" fullWidth size="medium" disabled />
+                </div>
+            </div>
+            <Button variant="contained" sx={{ width: "300px", left: "50%", transform: "translate(-50%, -50%)" }} className="prof-btn" size="small">Сохранить изменения</Button>
+        </div>
     )
 }

@@ -4,6 +4,7 @@ from passlib.hash import pbkdf2_sha256
 
 from .db import db, BaseModel
 from .config import UserRole, SUBSCRIPTION_PERIODS, TODAY
+from .PhotoModel import PhotoModel
 
 
 class UserModel(BaseModel):
@@ -15,6 +16,8 @@ class UserModel(BaseModel):
     email = db.Column(db.String(120), unique=True, nullable=False)
     role = db.Column(db.Enum(UserRole), default=UserRole.USER)
     subscription_end = db.Column(db.DateTime(timezone=True), nullable=True)
+    avatar_id = db.Column(db.Integer, db.ForeignKey("photo.id"), nullable=True)
+    verified = db.Column(db.Boolean, default=False)
 
     def __init__(self, username: str, password: str, email: str) -> None:
         self.username = username
@@ -41,11 +44,27 @@ class UserModel(BaseModel):
             "username": self.username,
             "role": self.role.value,
             "subscription": self.subscription.strftime("%d.%m.%Y") \
-                if self.subscription_end is not None else None
+                if self.subscription_end is not None else None,
+            "avatar": self.avatar_id
         }
 
     def change_role(self, role: UserRole) -> None:
         self.role = role
+        self.save()
+
+    def patch(self, new_username: str, new_email: str, new_password: str, new_avatar: bytes):
+        if new_username:
+            self.username = new_username
+        if new_email:
+            self.verified = False
+        if new_password:
+            self.password = new_password
+        if new_avatar:
+            avatar = PhotoModel(
+                binary = new_avatar
+            )
+            avatar.save()
+            self.avatar_id = avatar.id
         self.save()
 
     def add_subscription(self, subscription_days: int) -> tuple[bool, str]:

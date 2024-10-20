@@ -21,9 +21,11 @@ class Login(BaseResource):
 
         if user:
             access_token = create_access_token(identity=user.json())
+            user_data = user.json()
+            user_data.update({"email": user.email})
             return {
                 "message": "Login successful",
-                "user": user.json(),
+                "user": user_data,
                 "access_token": access_token
             }, HTTPStatus.OK
         else:
@@ -55,8 +57,10 @@ class Register(BaseResource):
         
         print("user: ", user.json())
         access_token = create_access_token(identity=user.json())
+        user_data = user.json()
+        user_data.update({"email": user.email})
         return {
             "message": "User created successfully",
             "access_token": access_token,
-            "user": user.json()
+            "user": user_data
         }, HTTPStatus.CREATED
