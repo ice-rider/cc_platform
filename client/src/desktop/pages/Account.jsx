@@ -105,10 +105,10 @@ export default function Account() {
         <div className="account-page-block">
             <div className="acc-box">
                 <div className="profile-avatar">
-                    <Avatar 
-                        src={avatar}
-                        alt={user.username}
-                        sx={{ width: "225px", height: "225px", margin: "50px 0" }} />
+                    {user.avatar ?
+                        <img src={"data:image/jpeg;base64," + user.avatar.split("base64")[1]} alt={user.username} className="profile-avatar" /> :
+                        <Avatar src={user.avatar} alt={user.username} sx={{ width: "225px", height: "225px", margin: "50px 0" }} />
+                    }
                     <Button variant="contained" onClick={handleAvatarChange}>
                         <PhotoCameraOutlined /> &nbsp; Загрузить фото
                     </Button>
