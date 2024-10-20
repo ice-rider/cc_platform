@@ -20,12 +20,9 @@ code {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --primary-color: #E1D3FFD9;
-  --secondary-color: white;
 }
 
 body {
-  background: url("./assets/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

@@ -1,61 +1,45 @@
-.account-page__grid {
+.account-page-block {
     position: relative;
-    box-sizing: border-box;
-    padding: 50px;
-    width: 100vw;
-    height: calc(100vh - 116px);
-    display: grid;
-    grid-template-areas: 
-      "a a a b b"
-      "a a a c c";
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 50px;
-    grid-row-gap: 50px;
+    width: 1150px;
+    height: 510px;
+    margin: auto;
+    margin-top: 60px;
+    background: #daebf7;
+    padding: 10px 10px 35px 5px;
 }
-.account-page__lc {
-    grid-area: a;
-}
-.account-page__info {
-    grid-area: b;
-}
-.account-page__buy {
-    grid-area: c;
-}
-.box {
-    background: var(--secondary-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: top;
-}
-
-.subscription-info {   
+.acc-box {
     position: relative;
     width: 100%;
-    height: 90%;
+    height: 100%;
+    background: white;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 405px 330px 330px;
+    grid-template-rows: 1fr;
+    gap: 20px;
 }
-.subscription-info thead {
-    margin-bottom: 2em;
+.block {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
-.subscription-info thead th {
-    font-size: 35px;
-    font-weight: normal;
+/* 
+// 90 225 90, 330, 330 */
+.profile-avatar {
+    padding: 0 90px;
 }
-.subscription-info tbody td {
-    font-size: 25px;
-    height: auto;
+.profile-avatar > button{
+    padding: 10px 16px;
+    border-radius: 50px;
 }
-.subscription-info tbody tr {
-    height: 0.5em;
+button.prof-btn {
+    padding: 6px 10px;
+    border-radius: 50px;
 }
-.subscription-info tbody tr td:first-child {
-    width: 40%;
-    text-align: right;
-    padding-right: 1em;
-}
-.subscription-info tbody tr td:last-child {
-    width: 60%;
+
+.profile-info, .profile-subinfo {
+    padding-top: 75px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
