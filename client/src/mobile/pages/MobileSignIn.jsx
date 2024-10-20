@@ -1,4 +1,4 @@
-import "../../desktop/styles/SignIn.css";
+import "../styles/MobileSignIn.css";
 import { useState, useContext } from 'react';
 import { Box, Button, TextField, Container, Typography, Paper } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -87,7 +87,7 @@ export default function SignIn() {
                                 -2px  2px 2px 2px rgba(0, 0, 0, 0.05), \
                                  2px -2px 2px 2px rgba(0, 0, 0, 0.05)' }}>
                 <Typography variant="h4" mt={2}>
-                    Sign in
+                    Войти в аккаунт
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ padding: '10px 25px', borderRadius: '10px' }}>
                     <TextField
@@ -124,9 +124,10 @@ export default function SignIn() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign In
+                        Далее
                     </Button>
                 </Box>
+                <div>Нет аккаунта? <a href="/sign-up">Зарегистрироваться</a></div>
             </Paper>
         </Container>
     )

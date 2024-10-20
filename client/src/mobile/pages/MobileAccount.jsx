@@ -1,4 +1,4 @@
-import "../../desktop/styles/Account.css";
+import "../../mobile/styles/MobileAccount.css";
 
 export default function MobileAccount() {
     return (
