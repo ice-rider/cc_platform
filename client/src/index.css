@@ -20,6 +20,8 @@ code {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --primary-green: #55B76B;
+  --subtitle-gray: #414141;
 }
 
 body {
@@ -45,4 +47,18 @@ body {
   body {
     background-size: cover;
   }
+}
+
+.main-padding-normal{
+  padding: 20px 90px;
+}
+
+.page-title{
+  color: var(--primary-green);
+  font-size: 48px;
+  line-height: 72px;
+}
+
+.margin-left{
+  margin-left: 15px;
 }
