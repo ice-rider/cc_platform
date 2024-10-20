@@ -4,6 +4,8 @@ from .db import db, BaseModel
 
 
 class PhotoModel(BaseModel):
+    __tablename__ = "photos"
+
     id = db.Column(db.Integer, primary_key=True)
     binary = db.Column(db.LargeBinary, nullable=True)
 

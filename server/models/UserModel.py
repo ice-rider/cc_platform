@@ -16,13 +16,16 @@ class UserModel(BaseModel):
     email = db.Column(db.String(120), unique=True, nullable=False)
     role = db.Column(db.Enum(UserRole), default=UserRole.USER)
     subscription_end = db.Column(db.DateTime(timezone=True), nullable=True)
-    avatar_id = db.Column(db.Integer, db.ForeignKey("photo.id"), nullable=True)
+    avatar_id = db.Column(db.Integer, db.ForeignKey("photos.id"), nullable=True, default=None)
     verified = db.Column(db.Boolean, default=False)
+    avatar = db.relationship("photos", backref="users", uselist=False)
 
     def __init__(self, username: str, password: str, email: str) -> None:
         self.username = username
         self.password = password
         self.email = email
+        self.avatar = PhotoModel()
+        self.avatar.save()
         self.save()
 
     @classmethod

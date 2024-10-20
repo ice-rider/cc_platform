@@ -1,4 +1,4 @@
-import "../../desktop/styles/SignUp.css";
+import "../styles/MobileSignUp.css";
 import { useState, useContext } from 'react';
 import { Box, Button, TextField, Container, Typography, Paper } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -177,9 +177,10 @@ export default function SignUp() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign Up
+                        Зарегистрироваться
                     </Button>
                 </Box>
+                <a>Уже есть аккаунт? <a href='/sign-in'>Войти</a></a>
             </Paper>
         </Container>
     );
